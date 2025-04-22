@@ -4,7 +4,7 @@
 
 ### Feedback Collection API
 
-**Endpoint:** `/feedback`  
+**Endpoint:** `/`  
 **Method:** `POST`  
 **Content-Type:** `application/json`
 
@@ -23,7 +23,7 @@ Send a JSON object with the following fields:
 #### Example Request
 
 ```json
-POST /feedback HTTP/1.1
+POST / HTTP/1.1
 Content-Type: application/json
 
 {
@@ -82,8 +82,8 @@ Authorization: <your_token_here>
 
 #### Example Request
 
-```bash
-GET /
+```json
+GET / HTTP/1.1
 Authorization: <your_token_here>
 ```
 
