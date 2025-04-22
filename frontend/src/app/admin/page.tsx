@@ -73,11 +73,12 @@ const Page = () => {
   return (
     <div className="min-h-screen p-8 flex flex-col gap-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-5xl">Feedback Dashboard</h1>
-        <div className="flex gap-4">
+        <h1 className="text-2xl sm:text-5xl">Feedback Dashboard</h1>
+        <div className="flex flex-col sm:flex-row gap-4">
           <button
             onClick={() => setIsNewest(!isNewest)}
-            className="flex items-center gap-2 px-6 pt-2 pb-1 text-2xl border-1 border-[#C4A38A] rounded-lg"
+            className={`flex items-center gap-2 px-6 pt-2 pb-1 text-xl sm:text-2xl border-1 border-[#C4A38A] rounded-lg hover:bg-[#C4A38A]
+                        hover:text-white transition-colors cursor-pointer`}
           >
             {isNewest ? (
               <>
@@ -91,45 +92,43 @@ const Page = () => {
           </button>
           <button
             onClick={() => setRefresh(refresh + 1)}
-            className="px-6 pt-2 pb-1 text-2xl border-1 border-[#C4A38A] rounded-lg"
+            className="px-6 pt-2 pb-1 text-xl sm:text-2xl border-1 border-[#C4A38A] rounded-lg hover:bg-[#C4A38A] hover:text-white transition-colors cursor-pointer"
           >
             Refresh
           </button>
         </div>
       </div>
 
-      <div className="grid gap-6">
+      <div className="grid gap-6 overflow-x-auto">
         {data
           .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
           .map((item) => (
             <div
               key={item.id}
-              className="border-1 border-[#C4A38A] rounded-2xl p-6 flex flex-col gap-3"
+              className="border-1 border-[#C4A38A] rounded-2xl p-6 flex flex-col gap-1"
             >
-              <div className="flex justify-between items-start">
+              <div className="flex justify-between items-start gap-4 mb-2">
                 <h2 className="text-4xl">{item.name}</h2>
                 <span className="text-xl opacity-70">
                   {new Date(item.timestamp).toLocaleString()}
                 </span>
               </div>
-              <div className="grid grid-cols-2 gap-4 text-2xl">
-                <p>
-                  <span className="opacity-70">Email: </span>
-                  {item.email}
-                </p>
-                <p>
-                  <span className="opacity-70">Phone: </span>
-                  {item.phone}
-                </p>
+              <div className="flex gap-2">
+                <p className="opacity-70 text-2xl">Email: </p>
+                <p className="text-2xl">{item.email}</p>
+              </div>
+              <div className="flex gap-2">
+                <span className="opacity-70 text-2xl">Phone: </span>
+                <span className="text-2xl">{item.phone}</span>
               </div>
               <div className="flex gap-2">
                 <span className="opacity-70 text-2xl">Rating:</span>
                 <span className="text-2xl">{item.rating}</span>
               </div>
               {item.feedback && (
-                <div className="mt-2">
-                  <p className="opacity-70 text-2xl">Feedback:</p>
-                  <p className="text-2xl mt-1">{item.feedback}</p>
+                <div className="flex gap-2">
+                  <span className="opacity-70 text-2xl">Feedback:</span>
+                  <span className="text-2xl">{item.feedback}</span>
                 </div>
               )}
             </div>
@@ -142,7 +141,9 @@ const Page = () => {
             onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
             disabled={currentPage === 1}
             className={`text-3xl px-2 ${
-              currentPage === 1 ? "opacity-50" : "hover:text-[#C4A38A]"
+              currentPage === 1
+                ? "opacity-50"
+                : "hover:opacity-75 cursor-pointer"
             }`}
           >
             <PiArrowLeft />
@@ -153,7 +154,7 @@ const Page = () => {
               <button
                 key={index + 1}
                 onClick={() => setCurrentPage(index + 1)}
-                className={`w-10 h-10 pt-1 flex items-center justify-center rounded-lg text-xl
+                className={`w-10 h-10 pt-1 flex items-center justify-center rounded-lg text-xl cursor-pointer
                   ${
                     currentPage === index + 1
                       ? "bg-[#C4A38A] text-white"
@@ -169,7 +170,9 @@ const Page = () => {
             onClick={() => setCurrentPage(Math.min(pageCount, currentPage + 1))}
             disabled={currentPage === pageCount}
             className={`text-3xl px-2 ${
-              currentPage === pageCount ? "opacity-50" : "hover:text-[#C4A38A]"
+              currentPage === pageCount
+                ? "opacity-50"
+                : "cursor-pointer hover:opacity-75"
             }`}
           >
             <PiArrowRight />

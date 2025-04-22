@@ -38,7 +38,12 @@ const Form = () => {
       }
       return;
     }
-    if (!phone || !/^\d+$/.test(phone)) {
+    if (
+      !phone ||
+      !/^\d+$/.test(phone) ||
+      phone.length < 7 ||
+      phone.length > 15
+    ) {
       if (notyf) {
         notyf.error("Please enter a valid phone number");
       }
@@ -113,7 +118,7 @@ const Form = () => {
 
       <button
         type="submit"
-        className="px-6 pt-2 pb-1 text-3xl border-1 border-[#C4A38A] rounded-lg flex"
+        className="px-6 pt-2 pb-1 text-3xl border-1 border-[#C4A38A] rounded-lg flex hover:bg-[#c4a38a] transition-colors cursor-pointer"
       >
         Submit
       </button>
